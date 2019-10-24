@@ -76,16 +76,36 @@ REFERENCES "General_Employee_Information" ("emp_no");
 ALTER TABLE "Titles" ADD CONSTRAINT "fk_Titles_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "General_Employee_Information" ("emp_no");
 
+SELECT * from "Departments";
+
 SELECT * from "Department_Employees";
 
 SELECT * from "General_Employee_Information";
-
-SELECT * from "Department_Employees";
 
 SELECT * from "Department_Manager";
 
 SELECT * from "Salaries";
 
 SELECT * from "Titles";
+
+SELECT i.emp_no, i.last_name, i.first_name, i.gender, s.salary
+	FROM "General_Employee_Information" AS i
+LEFT JOIN "Salaries" AS s
+	ON i.emp_no = s.emp_no;
+
+-- Finding Employees who were hired in 1986.
+SELECT * from "General_Employee_Information" 
+	WHERE (hire_date >= '1986-01-01' AND hire_date <= '1986-12-31');
+
+-- Listing the Department of each Employeee.
+
+SELECT i.emp_no, i.last_name, i.first_name, d.dept_name
+	FROM "General_Employee_Information" AS i
+LEFT JOIN "Department_Employees" AS de
+	ON i.emp_no = de.emp_no
+LEFT JOIN "Departments" AS d 
+	ON de.dept_no = d.dept_no;
+
+
 
 
